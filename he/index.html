@@ -177,17 +177,37 @@
         .other-month {
             opacity: 0.5;
         }
+        .footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    border-top: 1px solid #e7e7e7;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
     <h1>לוח שנה עברי</h1>
-    <a href="/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה באנגלית</a>
+    <a href="https://dorpascal.com/hebrew-calendar/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה באנגלית</a>
     <div class="controls">
         <button onclick="changeMonth(1)">חודש הבא</button>
         <h2 id="current-month"></h2>
         <button onclick="changeMonth(-1)">חודש קודם</button>
     </div>
     <div id="calendar"></div>
+    <footer class="footer">
+        <p>נוצר על ידי <a href="https://dorpascal.com/he">דור פסקל</a></p>
+        <p>&copy; 2024 דור פסקל. כל הזכויות שמורות.</p>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-hijri@1.1.0/moment-hijri.js"></script>
