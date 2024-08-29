@@ -182,7 +182,12 @@
     font-family: Arial, sans-serif;
     border-top: 1px solid #e7e7e7;
 }
-
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 .footer a {
     color: #007bff;
     text-decoration: none;
@@ -191,6 +196,25 @@
 .footer a:hover {
     text-decoration: underline;
 }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        #calendar {
+            grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns for week layout */
+        }
+    }
+
+    @media (max-width: 480px) {
+        #calendar {
+            grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns for week layout */
+        }
+        h1, h2 {
+            font-size: 1.5em;
+        }
+        .day {
+            height: 80px; /* Smaller height for mobile */
+        }
+    }
     </style>
 </head>
 <body>

@@ -36,12 +36,10 @@
     <meta name="application-name" content="לוח שנה עברי">
     <link rel="canonical" href="https://dorpascal.com/hebrew-calendar/he/">
 
-
     <!-- Alternate Language Tags -->
     <link rel="alternate" hreflang="en" href="https://dorpascal.com/hebrew-calendar/">
     <link rel="alternate" hreflang="he" href="https://dorpascal.com/hebrew-calendar/he/">
     <link rel="alternate" hreflang="x-default" href="https://dorpascal.com/hebrew-calendar/">
-
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -109,7 +107,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
             background-color: #f0f4f8;
             color: #333;
         }
@@ -146,6 +143,9 @@
             color: white;
             border-radius: 5px 5px 0 0;
         }
+        .day-header.single-letter {
+            font-size: 0.8em;
+        }
         .gregorian-date {
             font-size: 0.8em;
             color: #7f8c8d;
@@ -178,21 +178,66 @@
             opacity: 0.5;
         }
         .footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    border-top: 1px solid #e7e7e7;
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            border-top: 1px solid #e7e7e7;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #calendar {
+                grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns for week layout */
+                gap: 0;
+                margin: 0;
+            }
+            .day-header {
+                font-size: 0.8em;
+                height: 40px !important; /* Smaller height for tablets */
+            }
+            .day {
+                height: 90px; /* Smaller height for tablets */
+            }
+            .controls {
+            margin-left: 10px;
+            margin-right: 10px;
+            }
 
-.footer a {
-    color: #007bff;
-    text-decoration: none;
-}
+        }
+        @media (max-width: 480px) {
+            #calendar {
+                grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns for week layout */
+            }
+            h1, h2 {
+                font-size: 1.5em;
+            }
 
-.footer a:hover {
-    text-decoration: underline;
-}
+        }
     </style>
 </head>
 <body>
@@ -214,6 +259,8 @@
 
     <script>
         let currentDate = new Date();
+        const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
+        const daysOfWeekShort = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
 
         function getHebrewDate(gregorianDate) {
             return new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {
@@ -232,10 +279,12 @@
 
             document.getElementById('current-month').textContent = new Intl.DateTimeFormat('he-IL', { month: 'long', year: 'numeric' }).format(currentDate);
 
-            const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
-            daysOfWeek.forEach(day => {
+            const isSmallScreen = window.innerWidth <= 480;
+            const dayNames = isSmallScreen ? daysOfWeekShort : daysOfWeek;
+
+            dayNames.forEach(day => {
                 const dayHeader = document.createElement('div');
-                dayHeader.className = 'day day-header';
+                dayHeader.className = 'day day-header' + (isSmallScreen ? ' single-letter' : '');
                 dayHeader.textContent = day;
                 calendarEl.appendChild(dayHeader);
             });
@@ -289,6 +338,11 @@
             renderCalendar();
         }
 
+        function handleResize() {
+            renderCalendar();
+        }
+
+        window.addEventListener('resize', handleResize);
         renderCalendar();
     </script>
 </body>
