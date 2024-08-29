@@ -257,7 +257,7 @@
         let currentDate = new Date();
         const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
         const daysOfWeekShort = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
-        const hebrewNumerals = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'יא', 'יב', 'יג', 'יד', 'טו', 'טז', 'יז', 'יח', 'יט', 'כ', 'כא', 'כב', 'כג', 'כד', 'כה', 'כו', 'כז', 'כח', 'כט', 'ל'];
+        const hebrewNumerals = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ', 'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל'];
         let useDigits = false;
 
         function getHebrewDate(gregorianDate, useDigits = false) {
@@ -279,42 +279,74 @@
             return hebrewDate.trim();
         }
 
-        function convertToHebrewYear(numericYear) {
-            const hebrewNumerals = [
-                'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר', 'ש', 'ת'
-            ];
-            const specialCases = {
-                15: 'ט״ו',
-                16: 'ט״ז'
-            };
+  function convertToHebrewYear(numericYear) {
+    const hebrewNumerals = [
+        'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר', 'ש', 'ת'
+    ];
+    const specialCases = {
+        15: 'ט״ו',
+        16: 'ט״ז'
+    };
 
-            let year = parseInt(numericYear) - 5000;
-            let result = 'ה׳';
+    let year = parseInt(numericYear) - 5000;  // Convert to Hebrew year by subtracting 5000
+    let result = 'ה׳';  // Start with 'ה׳' for the Hebrew millennium
 
-            if (year in specialCases) {
-                result += specialCases[year];
-            } else {
-                let thousands = Math.floor(year / 1000);
-                year %= 1000;
-                let hundreds = Math.floor(year / 100);
-                year %= 100;
-                let tens = Math.floor(year / 10);
-                let ones = year % 10;
+    // Calculate the remaining year after removing the first 5000
+    let hundreds = Math.floor(year / 100);
+    year %= 100;
+    let tens = Math.floor(year / 10);
+    let ones = year % 10;
 
-                if (thousands > 0) result += hebrewNumerals[thousands - 1];
-                if (hundreds > 0) result += hebrewNumerals[hundreds + 8];
-                if (tens > 0) result += hebrewNumerals[tens + 8];
-                if (ones > 0) result += hebrewNumerals[ones - 1];
-            }
-
-            if (result.length > 2) {
-                result = result.slice(0, -1) + '״' + result.slice(-1);
-            } else if (result.length > 1) {
-                result += '׳';
-            }
-
-            return result;
+    // Append the correct Hebrew letter for the hundreds place
+    if (hundreds > 0) {
+        // For 784, 7 should be translated to ת (400)
+        if (hundreds === 7) {
+            result += 'תש';
+        } else if (hundreds === 6) {
+            result += 'ש';
+        } else if (hundreds === 5) {
+            result += 'ה';
+        } else if (hundreds === 4) {
+            result += 'ד';
         }
+    }
+
+    // Append the correct Hebrew letter for the tens place
+    if (tens > 0) {
+        const tensMap = {
+            1: 'י',  // 10
+            2: 'כ',  // 20
+            3: 'ל',  // 30
+            4: 'מ',  // 40
+            5: 'נ',  // 50
+            6: 'ס',  // 60
+            7: 'ע',  // 70
+            8: 'פ',  // 80
+            9: 'צ'   // 90
+        };
+        result += tensMap[tens];
+    }
+
+    // Append the correct Hebrew letter for the ones place
+    if (ones > 0) {
+        result += hebrewNumerals[ones - 1];  // Ones start at index 0
+    }
+
+    // Adjust for special cases like ט״ו and ט״ז
+    if (tens === 1 && (ones === 5 || ones === 6)) {
+        result = result.slice(0, -2) + specialCases[tens * 10 + ones];
+    } else {
+        // Add the final punctuation
+        if (result.length > 3) {
+            result = result.slice(0, -1) + '״' + result.slice(-1);
+        } else if (result.length > 2) {
+            result += '׳';
+        }
+    }
+
+    return result;
+}
+
 
         function updateClock() {
             const now = new Date();
