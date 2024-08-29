@@ -101,6 +101,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/icons/Web/icons8-tear-off-calendar-windows-11-color-96.png">
     <link rel="icon" type="image/png" sizes="120x120" href="/icons/Web/icons8-tear-off-calendar-windows-11-color-120.png">
     <link rel="shortcut icon" href="https://dorpascal.com/favicon.ico">
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -190,62 +191,61 @@
         .footer a:hover {
             text-decoration: underline;
         }
-        .controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        #clock {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
         }
-        button:hover {
-            background-color: #2980b9;
-}
-        /* Responsive Design */
+        #date-display {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .toggle-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
         @media (max-width: 768px) {
             #calendar {
-                grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns for week layout */
+                grid-template-columns: repeat(7, 1fr);
                 gap: 0;
                 margin: 0;
             }
             .day-header {
                 font-size: 0.8em;
-                height: 40px !important; /* Smaller height for tablets */
+                height: 40px !important;
             }
             .day {
-                height: 90px; /* Smaller height for tablets */
+                height: 90px;
             }
             .controls {
-            margin-left: 10px;
-            margin-right: 10px;
+                margin-left: 10px;
+                margin-right: 10px;
             }
-
         }
         @media (max-width: 480px) {
             #calendar {
-                grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns for week layout */
+                grid-template-columns: repeat(7, 1fr);
             }
             h1, h2 {
                 font-size: 1.5em;
             }
-
         }
     </style>
 </head>
 <body>
     <h1>לוח שנה עברי</h1>
-    <a href="https://dorpascal.com/hebrew-calendar/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה באנגלית</a>
+    <div id="clock"></div>
+    <div id="date-display"></div>
+    <div class="toggle-container">
+        <label>
+            <input type="checkbox" id="toggle-digits" onchange="toggleDigits()"> הצג מספרים בספרות
+        </label>
+    </div>
     <div class="controls">
-        <button onclick="changeMonth(1)">חודש הבא</button>
-        <h2 id="current-month"></h2>
         <button onclick="changeMonth(-1)">חודש קודם</button>
+        <h2 id="current-month"></h2>
+        <button onclick="changeMonth(1)">חודש הבא</button>
     </div>
     <div id="calendar"></div>
     <footer class="footer">
@@ -253,20 +253,77 @@
         <p>&copy; 2024 דור פסקל. כל הזכויות שמורות.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@1.1.0/moment-hijri.js"></script>
-
     <script>
         let currentDate = new Date();
         const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
         const daysOfWeekShort = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+        const hebrewNumerals = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'יא', 'יב', 'יג', 'יד', 'טו', 'טז', 'יז', 'יח', 'יט', 'כ', 'כא', 'כב', 'כג', 'כד', 'כה', 'כו', 'כז', 'כח', 'כט', 'ל'];
+        let useDigits = false;
 
-        function getHebrewDate(gregorianDate) {
-            return new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            }).format(gregorianDate);
+        function getHebrewDate(gregorianDate, useDigits = false) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formatter = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options);
+            const parts = formatter.formatToParts(gregorianDate);
+
+            let hebrewDate = '';
+            parts.forEach(part => {
+                if (part.type === 'day') {
+                    hebrewDate += useDigits ? part.value : hebrewNumerals[parseInt(part.value) - 1];
+                } else if (part.type === 'month') {
+                    hebrewDate += ' ' + part.value;
+                } else if (part.type === 'year') {
+                    hebrewDate += ' ' + (useDigits ? part.value : convertToHebrewYear(part.value));
+                }
+            });
+
+            return hebrewDate.trim();
+        }
+
+        function convertToHebrewYear(numericYear) {
+            const hebrewNumerals = [
+                'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר', 'ש', 'ת'
+            ];
+            const specialCases = {
+                15: 'ט״ו',
+                16: 'ט״ז'
+            };
+
+            let year = parseInt(numericYear) - 5000;
+            let result = 'ה׳';
+
+            if (year in specialCases) {
+                result += specialCases[year];
+            } else {
+                let thousands = Math.floor(year / 1000);
+                year %= 1000;
+                let hundreds = Math.floor(year / 100);
+                year %= 100;
+                let tens = Math.floor(year / 10);
+                let ones = year % 10;
+
+                if (thousands > 0) result += hebrewNumerals[thousands - 1];
+                if (hundreds > 0) result += hebrewNumerals[hundreds + 8];
+                if (tens > 0) result += hebrewNumerals[tens + 8];
+                if (ones > 0) result += hebrewNumerals[ones - 1];
+            }
+
+            if (result.length > 2) {
+                result = result.slice(0, -1) + '״' + result.slice(-1);
+            } else if (result.length > 1) {
+                result += '׳';
+            }
+
+            return result;
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('he-IL');
+            const dateString = now.toLocaleDateString('he-IL');
+            const hebrewDateString = getHebrewDate(now, useDigits);
+
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date-display').textContent = `${dateString} - ${hebrewDateString}`;
         }
 
         function renderCalendar() {
@@ -292,37 +349,33 @@
             const lastDay = new Date(year, month + 1, 0);
             const today = new Date();
 
-            // Previous month's days
-            const prevMonthLastDay = new Date(year, month, 0).getDate();
             for (let i = firstDay.getDay() - 1; i >= 0; i--) {
-                const dayEl = createDayElement(prevMonthLastDay - i, true);
+                const dayEl = createDayElement(new Date(year, month, -i), true);
                 calendarEl.appendChild(dayEl);
             }
 
-            // Current month's days
             for (let day = 1; day <= lastDay.getDate(); day++) {
-                const dayEl = createDayElement(day, false, new Date(year, month, day), today);
+                const dayEl = createDayElement(new Date(year, month, day), false, today);
                 calendarEl.appendChild(dayEl);
             }
 
-            // Next month's days
             const remainingSlots = 42 - calendarEl.children.length;
             for (let day = 1; day <= remainingSlots; day++) {
-                const dayEl = createDayElement(day, true);
+                const dayEl = createDayElement(new Date(year, month + 1, day), true);
                 calendarEl.appendChild(dayEl);
             }
         }
 
-        function createDayElement(day, isOtherMonth, date, today) {
+        function createDayElement(date, isOtherMonth, today) {
             const dayEl = document.createElement('div');
             dayEl.className = 'day' + (isOtherMonth ? ' other-month' : '');
 
-            if (date && today && date.toDateString() === today.toDateString()) {
+            if (today && date.toDateString() === today.toDateString()) {
                 dayEl.classList.add('today');
             }
 
-            const hebrewDate = date ? getHebrewDate(date) : '';
-            const gregorianDate = date ? date.getDate() + '/' + (date.getMonth() + 1) : '';
+            const hebrewDate = getHebrewDate(date, useDigits).split(' ')[0];
+            const gregorianDate = date.getDate() + '/' + (date.getMonth() + 1);
 
             dayEl.innerHTML = `
                 <div>${hebrewDate}</div>
@@ -337,12 +390,20 @@
             renderCalendar();
         }
 
+        function toggleDigits() {
+            useDigits = !useDigits;
+            renderCalendar();
+            updateClock();
+        }
+
         function handleResize() {
             renderCalendar();
         }
 
         window.addEventListener('resize', handleResize);
+        setInterval(updateClock, 1000);
         renderCalendar();
+        updateClock();
     </script>
 </body>
 </html>
