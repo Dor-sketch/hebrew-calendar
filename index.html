@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebrew Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .day {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+            height: 80px;
+            overflow: hidden;
+        }
+        .day-header {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+        .hebrew-date {
+            font-size: 0.8em;
+            color: #666;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hebrew Calendar</h1>
+    <div class="controls">
+        <button onclick="changeMonth(-1)">Previous Month</button>
+        <h2 id="current-month"></h2>
+        <button onclick="changeMonth(1)">Next Month</button>
+    </div>
+    <div id="calendar"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@1.1.0/moment-hijri.js"></script>
+
+    <script>
+        let currentDate = new Date();
+
+        function getHebrewDate(gregorianDate) {
+            const hebrewDate = new Intl.DateTimeFormat('he-u-ca-hebrew', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(gregorianDate);
+
+            return hebrewDate;
+        }
+
+        function renderCalendar() {
+            const calendarEl = document.getElementById('calendar');
+            calendarEl.innerHTML = '';
+
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            document.getElementById('current-month').textContent = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate);
+
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            daysOfWeek.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day day-header';
+                dayHeader.textContent = day;
+                calendarEl.appendChild(dayHeader);
+            });
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                calendarEl.appendChild(document.createElement('div'));
+            }
+
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'day';
+
+                const date = new Date(year, month, day);
+                const hebrewDate = getHebrewDate(date);
+
+                dayEl.innerHTML = `
+                    <div>${day}</div>
+                    <div class="hebrew-date">${hebrewDate}</div>
+                `;
+
+                calendarEl.appendChild(dayEl);
+            }
+        }
+
+        function changeMonth(delta) {
+            currentDate.setMonth(currentDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        renderCalendar();
+    </script>
+</body>
+</html>
