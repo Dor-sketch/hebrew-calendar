@@ -311,6 +311,10 @@
                 top: 10px;
                 right: 10px;
             }
+            header {
+                padding: 10px;
+                border-radius: 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -322,6 +326,15 @@
             }
 
         }
+        button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+button svg {
+    vertical-align: middle;
+}
 
     </style>
 </head>
@@ -339,9 +352,20 @@
         </label>
     </div>
     <div class="controls">
-        <button onclick="changeMonth(-1)">חודש קודם</button>
+        <button onclick="changeMonth(-1)">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+            חודש קודם
+        </button>
         <h2 id="current-month"></h2>
-        <button onclick="changeMonth(1)">חודש הבא</button>
+        <button onclick="changeMonth(1)">
+            חודש הבא
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </button>
     </div>
     <div id="calendar"></div>
     <footer class="footer">
