@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "Hebrew Calendar",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "A Hebrew-Gregorian calendar extension",
+    "description": "The description of the extension"
+  }
+}

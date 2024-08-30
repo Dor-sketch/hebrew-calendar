@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "Calendario Hebreo",
+    "description": "El nombre de la extensión"
+  },
+  "extensionDescription": {
+    "message": "Una extensión de calendario hebreo-gregoriano",
+    "description": "La descripción de la extensión"
+  }
+}
