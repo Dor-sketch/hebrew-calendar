@@ -38,7 +38,7 @@
     <!-- Alternate Language Tags -->
     <link rel="alternate" hreflang="en" href="https://dorpascal.com/hebrew-calendar/">
     <link rel="alternate" hreflang="he" href="https://dorpascal.com/hebrew-calendar/he/">
-    <link rel="alternate" hreflang="x-default" href="https://dorpascal.com/hebrew-calendar/">
+    <link rel="alternate" hreflang="x-default" href="https://dorpascal.com/hebrew-calendar/he/">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -91,6 +91,12 @@
             "position": 2,
             "name": "לוח שנה עברי",
             "item": "https://dorpascal.com/hebrew-calendar/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "לוח שנה עברי לועזי",
+            "item": "https://dorpascal.com/hebrew-calendar/he/"
         }]
     }
     </script>
@@ -138,13 +144,17 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
+            margin: 0;
         }
+
+        main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
         h1, h2 {
             text-align: center;
@@ -336,17 +346,64 @@
 button svg {
     vertical-align: middle;
 }
+        #parasha-hashavua {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+        .explanation {
+    background-color: var(--calendar-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.explanation h2 {
+    color: var(--header-bg);
+    border-bottom: 2px solid var(--header-bg);
+    padding-bottom: 10px;
+}
+
+.explanation h3 {
+    color: var(--text-color);
+    margin-top: 15px;
+}
+
+.explanation ul {
+    padding-right: 20px;
+}
+
+.explanation li {
+    margin-bottom: 10px;
+}
+
+.dark-theme .explanation  h2 {
+    color: var(--header-text);
+    border-bottom: 2px solid var(--header-text);
+}
+.dark-theme a {
+    color: var(--link-color);
+}
+
+.dark-theme a:hover {
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
-<header>
-    <button class="theme-toggle" onclick="toggleTheme()">למצב כהה</button>
-    <div id="clock"></div>
-    <div id="date-display"></div>
-
-    <h1>לוח שנה עברי לועזי</h1>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">למצב כהה</button>
+        <div id="clock"></div>
+        <div id="date-display"></div>
+        <h1>לוח שנה עברי לועזי</h1>
+        <div id="parasha-hashavua"></div>
     </header>
+    <main>
+        <a href="./#date-calculation-explanation">הסבר על החישובים</a>
+        <br>
+        <a href="./#date-conversion">המרת תאריך</a>
     <div class="toggle-container">
         <label>
             <input type="checkbox" id="toggle-digits" onchange="toggleDigits()"> הצג מספרים בספרות
@@ -369,12 +426,77 @@ button svg {
         </button>
     </div>
     <div id="calendar"></div>
+<section id="date-calculation-explanation" class="explanation">
+    <h2>איך מחושב התאריך העברי?</h2>
+    <p>לוח השנה שלנו משתמש בטכנולוגיה מתקדמת כדי להציג את התאריך העברי במדויק. הנה כמה נקודות מפתח על אופן פעולתו:</p>
+    <ul>
+        <h3>המרת תאריכים</h3>
+        <li>אנו משתמשים במערכת מובנית של הדפדפן להמרת תאריכים גרגוריאניים (לועזיים) לתאריכים עבריים.</li>
+        <li>זה מבטיח דיוק גבוה ומתחשב בכל המורכבויות של לוח השנה העברי.</li>
+    </ul>
+    <ul>
+        <h3>מאפייני הלוח העברי</h3>
+        <li>הלוח העברי הוא לוח ירחי-שמשי, המבוסס על מחזורי הירח והשמש.</li>
+        <li>היום העברי מתחיל בשקיעה, בניגוד ליום הלועזי שמתחיל בחצות.</li>
+        <li>שנים עבריות נספרות מבריאת העולם לפי המסורת היהודית.</li>
+        <li>הלוח העברי כולל חודשים מעוברים במקום ימים מעוברים.</li>
+    </ul>
+    <ul>
+        <h3>תצוגה מותאמת אישית</h3>
+        <li>אנו מציגים את התאריכים העבריים בפורמט מסורתי, כולל אותיות עבריות לציון ימים ושנים.</li>
+        <li>ניתן לבחור בין תצוגת מספרים רגילה לתצוגה מסורתית של אותיות עבריות.</li>
+    </ul>
+    <p>בזכות שילוב זה של טכנולוגיה מודרנית ומסורת, אנו מציעים לוח שנה עברי מדויק ונוח לשימוש.</p>
+</section>
+<section id="date-conversion" class="explanation">
+<h2>המרת תאריך לועזי לעברי</h2>
+<p>השתמש בטופס הבא כדי להמיר תאריך לועזי לתאריך עברי. רק הזן תאריך ולחץ על "המרה" כדי לקבל את התאריך העברי המתאים.</p>
+<form id="date-conversion-form">
+    <label for="gregorian-date">תאריך לועזי:</label>
+    <input type="date" id="gregorian-date" required>
+    <button type="submit">המרה</button>
+</form>
+<div id="hebrew-date"></div>
+
+</section>
+</main>
     <footer class="footer">
         <p>נוצר על ידי <a href="https://dorpascal.com/he">דור פסקל</a></p>
         <p>&copy; 2024 דור פסקל. כל הזכויות שמורות.</p>
     </footer>
 
     <script>
+// function to convert gregorian date to hebrew date
+function convertToHebrewDate(gregorianDate) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formatter = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options);
+    const parts = formatter.formatToParts(gregorianDate);
+
+    let hebrewDate = '';
+    parts.forEach(part => {
+        if (part.type === 'day') {
+            hebrewDate += part.value;
+        } else if (part.type === 'month') {
+            hebrewDate += ' ' + part.value;
+        } else if (part.type === 'year') {
+            hebrewDate += ' ' + part.value;
+        }
+    });
+
+    return hebrewDate.trim();
+}
+// listen for form submission
+document.getElementById('date-conversion-form').addEventListener('submit', function (event) {
+
+    event.preventDefault();
+
+    const gregorianDate = new Date(document.getElementById('gregorian-date').value);
+    const hebrewDate = convertToHebrewDate(gregorianDate);
+
+    document.getElementById('hebrew-date').textContent = `התאריך העברי הוא: ${hebrewDate}`;
+});
+
+
         let currentDate = new Date();
         const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
         const daysOfWeekShort = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
@@ -543,28 +665,128 @@ button svg {
             renderCalendar();
         }
 
-        function toggleDigits() {
-            useDigits = !useDigits;
-            renderCalendar();
-            updateClock();
-        }
 
         function handleResize() {
             renderCalendar();
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            // change the button text
-            const themeToggle = document.querySelector('.theme-toggle');
-            themeToggle.textContent = document.body.classList.contains('dark-theme') ? 'למצב בהיר' : 'למצב כהה';
-            renderCalendar();
-        }
 
         window.addEventListener('resize', handleResize);
         setInterval(updateClock, 1000);
         renderCalendar();
         updateClock();
+
+
+const parshiot2024 = [
+    { date: new Date(2024, 0, 6), name: 'שְׁמוֹת' },
+    { date: new Date(2024, 0, 13), name: 'וָאֵרָא' },
+    { date: new Date(2024, 0, 20), name: 'בֹּא' },
+    { date: new Date(2024, 0, 27), name: 'בְּשַׁלַּח' },
+    { date: new Date(2024, 1, 3), name: 'יִתְרוֹ' },
+    { date: new Date(2024, 1, 10), name: 'מִּשְׁפָּטִים' },
+    { date: new Date(2024, 1, 17), name: 'תְּרוּמָה' },
+    { date: new Date(2024, 1, 24), name: 'תְּצַוֶּה' },
+    { date: new Date(2024, 2, 2), name: 'כִּי תִשָּׂא' },
+    { date: new Date(2024, 2, 9), name: 'וַיַּקְהֵל' },
+    { date: new Date(2024, 2, 16), name: 'פְקוּדֵי' },
+    { date: new Date(2024, 2, 23), name: 'וַיִּקְרָא' },
+    { date: new Date(2024, 2, 30), name: 'צַו' },
+    { date: new Date(2024, 3, 6), name: 'שְּׁמִינִי' },
+    { date: new Date(2024, 3, 13), name: 'תַזְרִיעַ' },
+    { date: new Date(2024, 3, 20), name: 'מְּצֹרָע' },
+    { date: new Date(2024, 4, 4), name: 'אַחֲרֵי מוֹת' },
+    { date: new Date(2024, 4, 11), name: 'קְדשִׁים' },
+    { date: new Date(2024, 4, 18), name: 'אֱמוֹר' },
+    { date: new Date(2024, 4, 25), name: 'בְּהַר' },
+    { date: new Date(2024, 5, 1), name: 'בְּחֻקֹּתַי' },
+    { date: new Date(2024, 5, 8), name: 'בְּמִדְבַּר' },
+    { date: new Date(2024, 5, 15), name: 'נָשׂא' },
+    { date: new Date(2024, 5, 22), name: 'בְּהַעֲלֹתְךָ' },
+    { date: new Date(2024, 5, 29), name: 'שְׁלַח־לְךָ' },
+    { date: new Date(2024, 6, 6), name: 'קוֹרַח' },
+    { date: new Date(2024, 6, 13), name: 'חֻקַּת' },
+    { date: new Date(2024, 6, 20), name: 'בָּלָק' },
+    { date: new Date(2024, 6, 27), name: 'פִּינְחָס' },
+    { date: new Date(2024, 7, 3), name: 'מַּטּוֹת־מַסְעֵי' },
+    { date: new Date(2024, 7, 10), name: 'דְּבָרִים' },
+    { date: new Date(2024, 7, 17), name: 'וָאֶתְחַנַּן' },
+    { date: new Date(2024, 7, 24), name: 'עֵקֶב' },
+    { date: new Date(2024, 7, 31), name: 'רְאֵה' },
+    { date: new Date(2024, 8, 7), name: 'שׁוֹפְטִים' },
+    { date: new Date(2024, 8, 14), name: 'כִּי־תֵצֵא' },
+    { date: new Date(2024, 8, 21), name: 'כִּי־תָבוֹא' },
+    { date: new Date(2024, 8, 28), name: 'נִצָּבִים־וַיֵּלֶךְ' },
+    { date: new Date(2024, 9, 5), name: 'הַאֲזִינוּ' },
+    { date: new Date(2024, 9, 26), name: 'בְּרֵאשִׁית' },
+    { date: new Date(2024, 10, 2), name: 'נֹחַ' },
+    { date: new Date(2024, 10, 9), name: 'לֶךְ־לְךָ' },
+    { date: new Date(2024, 10, 16), name: 'וַיֵּרָא' },
+    { date: new Date(2024, 10, 23), name: 'חַיֵּי שָֹרָה' },
+    { date: new Date(2024, 10, 30), name: 'תּוֹלְדוֹת' },
+    { date: new Date(2024, 11, 7), name: 'וַיֵּצֵא' },
+    { date: new Date(2024, 11, 14), name: 'וַיִּשְׁלַח' },
+    { date: new Date(2024, 11, 21), name: 'וַיֵּשֶׁב' },
+    { date: new Date(2024, 11, 28), name: 'מִקֵּץ' }
+];
+
+function getParashatHashavua() {
+    const now = new Date();
+    for (let i = parshiot2024.length - 1; i >= 0; i--) {
+        if (now >= parshiot2024[i].date) {
+            return parshiot2024[i].name;
+        }
+    }
+    return parshiot2024[0].name; // Default to the first parasha if no match found
+}
+
+function displayParashatHashavua() {
+    const parasha = getParashatHashavua();
+    const parashaElement = document.getElementById('parasha-hashavua');
+    parashaElement.textContent = `פרשת השבוע: ${parasha}`;
+}
+
+// Modify the existing toggleTheme function
+function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+    const isDarkTheme = document.body.classList.contains('dark-theme');
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.textContent = isDarkTheme ? 'למצב בהיר' : 'למצב כהה';
+    renderCalendar();
+}
+
+// Modify the existing toggleDigits function
+function toggleDigits() {
+    useDigits = !useDigits;
+    localStorage.setItem('useDigits', useDigits);
+    renderCalendar();
+    updateClock();
+}
+
+// Add this function to load saved preferences
+function loadPreferences() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        document.querySelector('.theme-toggle').textContent = 'למצב בהיר';
+    }
+
+    const savedUseDigits = localStorage.getItem('useDigits');
+    if (savedUseDigits !== null) {
+        useDigits = savedUseDigits === 'true';
+        document.getElementById('toggle-digits').checked = useDigits;
+    }
+}
+
+// Modify the existing window.onload function or add this if it doesn't exist
+window.onload = function() {
+    loadPreferences();
+    renderCalendar();
+    updateClock();
+    displayParashatHashavua();
+    setInterval(updateClock, 1000);
+    window.addEventListener('resize', handleResize);
+};
     </script>
 </body>
 </html>
