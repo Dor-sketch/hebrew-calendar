@@ -5,6 +5,57 @@ const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמי�
 const daysOfWeekShort = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
 const hebrewNumerals = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳', 'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ', 'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל'];
 
+const parshiot2024 = [
+    { date: new Date(2024, 0, 6), name: 'שְׁמוֹת' },
+    { date: new Date(2024, 0, 13), name: 'וָאֵרָא' },
+    { date: new Date(2024, 0, 20), name: 'בֹּא' },
+    { date: new Date(2024, 0, 27), name: 'בְּשַׁלַּח' },
+    { date: new Date(2024, 1, 3), name: 'יִתְרוֹ' },
+    { date: new Date(2024, 1, 10), name: 'מִּשְׁפָּטִים' },
+    { date: new Date(2024, 1, 17), name: 'תְּרוּמָה' },
+    { date: new Date(2024, 1, 24), name: 'תְּצַוֶּה' },
+    { date: new Date(2024, 2, 2), name: 'כִּי תִשָּׂא' },
+    { date: new Date(2024, 2, 9), name: 'וַיַּקְהֵל' },
+    { date: new Date(2024, 2, 16), name: 'פְקוּדֵי' },
+    { date: new Date(2024, 2, 23), name: 'וַיִּקְרָא' },
+    { date: new Date(2024, 2, 30), name: 'צַו' },
+    { date: new Date(2024, 3, 6), name: 'שְּׁמִינִי' },
+    { date: new Date(2024, 3, 13), name: 'תַזְרִיעַ' },
+    { date: new Date(2024, 3, 20), name: 'מְּצֹרָע' },
+    { date: new Date(2024, 4, 4), name: 'אַחֲרֵי מוֹת' },
+    { date: new Date(2024, 4, 11), name: 'קְדשִׁים' },
+    { date: new Date(2024, 4, 18), name: 'אֱמוֹר' },
+    { date: new Date(2024, 4, 25), name: 'בְּהַר' },
+    { date: new Date(2024, 5, 1), name: 'בְּחֻקֹּתַי' },
+    { date: new Date(2024, 5, 8), name: 'בְּמִדְבַּר' },
+    { date: new Date(2024, 5, 15), name: 'נָשׂא' },
+    { date: new Date(2024, 5, 22), name: 'בְּהַעֲלֹתְךָ' },
+    { date: new Date(2024, 5, 29), name: 'שְׁלַח־לְךָ' },
+    { date: new Date(2024, 6, 6), name: 'קוֹרַח' },
+    { date: new Date(2024, 6, 13), name: 'חֻקַּת' },
+    { date: new Date(2024, 6, 20), name: 'בָּלָק' },
+    { date: new Date(2024, 6, 27), name: 'פִּינְחָס' },
+    { date: new Date(2024, 7, 3), name: 'מַּטּוֹת־מַסְעֵי' },
+    { date: new Date(2024, 7, 10), name: 'דְּבָרִים' },
+    { date: new Date(2024, 7, 17), name: 'וָאֶתְחַנַּן' },
+    { date: new Date(2024, 7, 24), name: 'עֵקֶב' },
+    { date: new Date(2024, 7, 31), name: 'רְאֵה' },
+    { date: new Date(2024, 8, 7), name: 'שׁוֹפְטִים' },
+    { date: new Date(2024, 8, 14), name: 'כִּי־תֵצֵא' },
+    { date: new Date(2024, 8, 21), name: 'כִּי־תָבוֹא' },
+    { date: new Date(2024, 8, 28), name: 'נִצָּבִים־וַיֵּלֶךְ' },
+    { date: new Date(2024, 9, 5), name: 'הַאֲזִינוּ' },
+    { date: new Date(2024, 9, 26), name: 'בְּרֵאשִׁית' },
+    { date: new Date(2024, 10, 2), name: 'נֹחַ' },
+    { date: new Date(2024, 10, 9), name: 'לֶךְ־לְךָ' },
+    { date: new Date(2024, 10, 16), name: 'וַיֵּרָא' },
+    { date: new Date(2024, 10, 23), name: 'חַיֵּי שָֹרָה' },
+    { date: new Date(2024, 10, 30), name: 'תּוֹלְדוֹת' },
+    { date: new Date(2024, 11, 7), name: 'וַיֵּצֵא' },
+    { date: new Date(2024, 11, 14), name: 'וַיִּשְׁלַח' },
+    { date: new Date(2024, 11, 21), name: 'וַיֵּשֶׁב' },
+    { date: new Date(2024, 11, 28), name: 'מִקֵּץ' }
+];
 console.log('Script started. Initial state:', { currentDate, useDigits, isDarkTheme });
 
 function initializeExtension() {
@@ -191,8 +242,10 @@ function getHebrewDate(gregorianDate) {
 
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
+             const gregorianMonth = new Intl.DateTimeFormat('he-IL', { month: 'long', year: 'numeric' }).format(currentDate);
+    const hebrewMonth = currentDate.toLocaleDateString('he-IL-u-ca-hebrew', { month: 'long', year: 'numeric' }).split(' ')[0];
 
-            document.getElementById('current-month').textContent = new Intl.DateTimeFormat('he-IL', { month: 'long', year: 'numeric' }).format(currentDate);
+            document.getElementById('current-month').textContent = `${gregorianMonth.split(' ')[0]} / ${hebrewMonth} ${gregorianMonth.split(' ')[1]}`;
 
             const isSmallScreen = window.innerWidth <= 480;
             const dayNames = isSmallScreen ? daysOfWeekShort : daysOfWeek;
@@ -241,6 +294,38 @@ function getHebrewDate(gregorianDate) {
                 <div class="gregorian-date">${gregorianDate}</div>
             `;
 
+            // if shapat add weekly parasha
+            if (date.getDay() === 6) {
+                const nextWeek = new Date(date);
+                nextWeek.setDate(date.getDate() - 7); // Move 7 days ahead
+                const parasha = getParashatHashavua(nextWeek);
+                const parashaEl = document.createElement('div');
+                parashaEl.className = 'parasha';
+                parashaEl.textContent = parasha;
+                dayEl.appendChild(parashaEl);
+            }
+
+            // if new month add month name
+            if (date.getDate() === 1) {
+                const monthName = new Intl.DateTimeFormat('he-IL', { month: 'long' }).format(date);
+                const monthEl = document.createElement('div');
+                monthEl.className = 'month-name';
+                monthEl.textContent = monthName;
+                dayEl.appendChild(monthEl);
+            }
+
+            // if new hebrew month add month name
+            if (hebrewDate === 'א׳') {
+            console.log('hebrewDate:', hebrewDate);
+                const monthName = date.toLocaleDateString('he-IL-u-ca-hebrew', { month: 'long' }).split(' ')[0];
+                const monthEl = document.createElement('div');
+                monthEl.className = 'month-name';
+                monthEl.textContent = monthName;
+                dayEl.appendChild(monthEl);
+                // make green background
+                dayEl.classList.add('new-hebrew-month');
+            }
+
             return dayEl;
         }
 
@@ -263,76 +348,34 @@ function getHebrewDate(gregorianDate) {
         updateClock();
 
 
-const parshiot2024 = [
-    { date: new Date(2024, 0, 6), name: 'שְׁמוֹת' },
-    { date: new Date(2024, 0, 13), name: 'וָאֵרָא' },
-    { date: new Date(2024, 0, 20), name: 'בֹּא' },
-    { date: new Date(2024, 0, 27), name: 'בְּשַׁלַּח' },
-    { date: new Date(2024, 1, 3), name: 'יִתְרוֹ' },
-    { date: new Date(2024, 1, 10), name: 'מִּשְׁפָּטִים' },
-    { date: new Date(2024, 1, 17), name: 'תְּרוּמָה' },
-    { date: new Date(2024, 1, 24), name: 'תְּצַוֶּה' },
-    { date: new Date(2024, 2, 2), name: 'כִּי תִשָּׂא' },
-    { date: new Date(2024, 2, 9), name: 'וַיַּקְהֵל' },
-    { date: new Date(2024, 2, 16), name: 'פְקוּדֵי' },
-    { date: new Date(2024, 2, 23), name: 'וַיִּקְרָא' },
-    { date: new Date(2024, 2, 30), name: 'צַו' },
-    { date: new Date(2024, 3, 6), name: 'שְּׁמִינִי' },
-    { date: new Date(2024, 3, 13), name: 'תַזְרִיעַ' },
-    { date: new Date(2024, 3, 20), name: 'מְּצֹרָע' },
-    { date: new Date(2024, 4, 4), name: 'אַחֲרֵי מוֹת' },
-    { date: new Date(2024, 4, 11), name: 'קְדשִׁים' },
-    { date: new Date(2024, 4, 18), name: 'אֱמוֹר' },
-    { date: new Date(2024, 4, 25), name: 'בְּהַר' },
-    { date: new Date(2024, 5, 1), name: 'בְּחֻקֹּתַי' },
-    { date: new Date(2024, 5, 8), name: 'בְּמִדְבַּר' },
-    { date: new Date(2024, 5, 15), name: 'נָשׂא' },
-    { date: new Date(2024, 5, 22), name: 'בְּהַעֲלֹתְךָ' },
-    { date: new Date(2024, 5, 29), name: 'שְׁלַח־לְךָ' },
-    { date: new Date(2024, 6, 6), name: 'קוֹרַח' },
-    { date: new Date(2024, 6, 13), name: 'חֻקַּת' },
-    { date: new Date(2024, 6, 20), name: 'בָּלָק' },
-    { date: new Date(2024, 6, 27), name: 'פִּינְחָס' },
-    { date: new Date(2024, 7, 3), name: 'מַּטּוֹת־מַסְעֵי' },
-    { date: new Date(2024, 7, 10), name: 'דְּבָרִים' },
-    { date: new Date(2024, 7, 17), name: 'וָאֶתְחַנַּן' },
-    { date: new Date(2024, 7, 24), name: 'עֵקֶב' },
-    { date: new Date(2024, 7, 31), name: 'רְאֵה' },
-    { date: new Date(2024, 8, 7), name: 'שׁוֹפְטִים' },
-    { date: new Date(2024, 8, 14), name: 'כִּי־תֵצֵא' },
-    { date: new Date(2024, 8, 21), name: 'כִּי־תָבוֹא' },
-    { date: new Date(2024, 8, 28), name: 'נִצָּבִים־וַיֵּלֶךְ' },
-    { date: new Date(2024, 9, 5), name: 'הַאֲזִינוּ' },
-    { date: new Date(2024, 9, 26), name: 'בְּרֵאשִׁית' },
-    { date: new Date(2024, 10, 2), name: 'נֹחַ' },
-    { date: new Date(2024, 10, 9), name: 'לֶךְ־לְךָ' },
-    { date: new Date(2024, 10, 16), name: 'וַיֵּרָא' },
-    { date: new Date(2024, 10, 23), name: 'חַיֵּי שָֹרָה' },
-    { date: new Date(2024, 10, 30), name: 'תּוֹלְדוֹת' },
-    { date: new Date(2024, 11, 7), name: 'וַיֵּצֵא' },
-    { date: new Date(2024, 11, 14), name: 'וַיִּשְׁלַח' },
-    { date: new Date(2024, 11, 21), name: 'וַיֵּשֶׁב' },
-    { date: new Date(2024, 11, 28), name: 'מִקֵּץ' }
-];
 
-function getParashatHashavua() {
-    const now = new Date();
-    for (let i = parshiot2024.length - 1; i >= 0; i--) {
-        if (now >= parshiot2024[i].date) {
-            return parshiot2024[i].name;
+
+    function getParashatHashavua(hebrewDate = null) {
+        let now;
+        if (hebrewDate) {
+            // Convert Hebrew date to Gregorian date
+            now = new Date(hebrewDate.toLocaleDateString('en-US', { calendar: 'gregory' }));
+        } else {
+            now = new Date();
         }
+        const nextWeek = new Date(now);
+        nextWeek.setDate(now.getDate() + 7); // Move 7 days ahead
+
+        for (let i = parshiot2024.length - 1; i >= 0; i--) {
+            if (nextWeek >= parshiot2024[i].date) {
+                return parshiot2024[i].name;
+            }
+        }
+        return parshiot2024[0].name;
     }
-    return parshiot2024[0].name; // Default to the first parasha if no match found
-}
 
 function displayParashatHashavua() {
     const parasha = getParashatHashavua();
-    const parashaElement = document.createElement('div');
+    const parashaElement = document.getElementById('parasha');
     parashaElement.id = 'parasha-hashavua';
     parashaElement.textContent = `פרשת השבוע: ${parasha}`;
     parashaElement.style.fontWeight = 'bold';
     parashaElement.style.marginTop = '10px';
     parashaElement.style.textAlign = 'center';
     parashaElement.style.direction = 'rtl'; // Ensure right-to-left text direction
-    document.body.appendChild(parashaElement);
 }
