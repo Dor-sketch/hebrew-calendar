@@ -607,9 +607,11 @@ document.getElementById('date-conversion-form').addEventListener('submit', funct
 
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
+            const gregorianMonth = new Intl.DateTimeFormat('he-IL', { month: 'long', year: 'numeric' }).format(currentDate);
+            const hebrewMonth = currentDate.toLocaleDateString('he-IL-u-ca-hebrew', { month: 'long', year: 'numeric' }).split(' ')[0];
+            const hebrewYear = currentDate.toLocaleDateString('he-IL-u-ca-hebrew', { year: 'numeric' }).split(' ')[1];
 
-            document.getElementById('current-month').textContent = new Intl.DateTimeFormat('he-IL', { month: 'long', year: 'numeric' }).format(currentDate);
-
+    document.getElementById('current-month').textContent = `${gregorianMonth.split(' ')[0]} / ${hebrewMonth} ${gregorianMonth.split(' ')[1]}`;
             const isSmallScreen = window.innerWidth <= 480;
             const dayNames = isSmallScreen ? daysOfWeekShort : daysOfWeek;
 
@@ -677,6 +679,7 @@ document.getElementById('date-conversion-form').addEventListener('submit', funct
         updateClock();
 
 
+
 const parshiot2024 = [
     { date: new Date(2024, 0, 6), name: 'שְׁמוֹת' },
     { date: new Date(2024, 0, 13), name: 'וָאֵרָא' },
@@ -729,15 +732,18 @@ const parshiot2024 = [
     { date: new Date(2024, 11, 28), name: 'מִקֵּץ' }
 ];
 
-function getParashatHashavua() {
-    const now = new Date();
-    for (let i = parshiot2024.length - 1; i >= 0; i--) {
-        if (now >= parshiot2024[i].date) {
-            return parshiot2024[i].name;
+    function getParashatHashavua() {
+        const now = new Date();
+        const nextWeek = new Date();
+        nextWeek.setDate(now.getDate() + 7); // Move 7 days ahead
+
+        for (let i = parshiot2024.length - 1; i >= 0; i--) {
+            if (nextWeek >= parshiot2024[i].date) {
+                return parshiot2024[i].name;
+            }
         }
+        return parshiot2024[0].name;
     }
-    return parshiot2024[0].name; // Default to the first parasha if no match found
-}
 
 function displayParashatHashavua() {
     const parasha = getParashatHashavua();
