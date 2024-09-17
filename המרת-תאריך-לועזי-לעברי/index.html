@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ממיר תאריך עברי לועזי - לוח שנה עברי</title>
+    <meta name="description" content="המר תאריכים לועזיים לתאריכים עבריים בקלות. כלי מקוון חינמי להמרת תאריכים מהלוח הגרגוריאני ללוח העברי.">
+    <meta name="keywords" content="המרת תאריכים, לוח שנה עברי, תאריך עברי, לוח גרגוריאני, המרה לעברית">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">
+    <meta property="og:title" content="ממיר תאריכים עברי - המרה מלועזי לעברי">
+    <meta property="og:description" content="המר תאריכים לועזיים לתאריכים עבריים בקלות. כלי מקוון חינמי להמרת תאריכים.">
+    <meta property="og:image" content="https://dorpascal.com/hebrew-calendar/calendar-preview.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dorpascal.com/hebrew-calender/המרת-תאריך-לועזי-לעברי/">
+    <meta property="twitter:title" content="ממיר תאריכים עברי - המרה מלועזי לעברי">
+    <meta property="twitter:description" content="המר תאריכים לועזיים לתאריכים עבריים בקלות. כלי מקוון חינמי להמרת תאריכים.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+            --border-color: #bdc3c7;
+            --link-color: #3498db;
+            --footer-bg: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .converter {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .explanation {
+            margin-top: 40px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .explanation h2 {
+            color: var(--primary-color);
+        }
+
+                .footer {
+            background-color: var(--footer-bg);
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            border-top: 1px solid var(--day-border);
+        }
+
+        .footer a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        header ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .converter {
+                padding: 20px;
+            }
+
+            .explanation {
+                padding: 10px;
+            }
+
+            .footer {
+                padding: 10px;
+            }
+
+            header ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+
+        }
+    </style>
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7HFKFX0PR');
+    </script>
+</head>
+<body>
+<header>
+<ul>
+<li><a href="https://dorpascal.com/hebrew-calendar/he">לוח שנה עברי</a></li>
+<li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">זמני כניסת שבת</a></li>
+<li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">המרת תאריך לועזי לעברי</a></li>
+</ul>
+</header>
+    <div class="container">
+        <h1>ממיר תאריכים עברי</h1>
+        <div class="converter">
+            <div class="form-group">
+                <label for="gregorian-date">בחר תאריך לועזי:</label>
+                <input type="date" id="gregorian-date" required>
+            </div>
+            <button onclick="convertDate()">המר לתאריך עברי</button>
+            <div id="result"></div>
+        </div>
+
+        <div class="explanation">
+            <h2>איך עובד ממיר התאריכים?</h2>
+            <p>ממיר התאריכים שלנו משתמש באלגוריתם מדויק להמרת תאריכים מהלוח הגרגוריאני (לועזי) ללוח העברי. הלוח העברי הוא לוח ירחי-שמשי, המבוסס על מחזורי הירח והשמש, ולכן החישוב מורכב יותר מהמרה פשוטה.</p>
+            <p>הממיר לוקח בחשבון את כל המורכבויות של הלוח העברי, כולל:</p>
+            <ul>
+                <li>חודשים מעוברים</li>
+                <li>אורך משתנה של חודשים עבריים</li>
+                <li>שנים מעוברות</li>
+                <li>התחלת היום העברי בשקיעה</li>
+            </ul>
+            <p>באמצעות הממיר הזה, תוכלו להמיר כל תאריך לועזי לתאריך העברי המקביל לו בקלות ובדיוק.</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>נוצר על ידי <a href="https://dorpascal.com/he">דור פסקל</a></p>
+        <p>&copy; 2024 דור פסקל. כל הזכויות שמורות.</p>
+    </footer>
+
+    <script>
+        function convertToHebrewDate(gregorianDate) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formatter = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options);
+            return formatter.format(gregorianDate);
+        }
+
+        function convertDate() {
+            const gregorianDateInput = document.getElementById('gregorian-date');
+            const resultDiv = document.getElementById('result');
+
+            if (gregorianDateInput.value) {
+                const gregorianDate = new Date(gregorianDateInput.value);
+                const hebrewDate = convertToHebrewDate(gregorianDate);
+                resultDiv.textContent = `התאריך העברי המקביל: ${hebrewDate}`;
+            } else {
+                resultDiv.textContent = 'נא לבחור תאריך תקין';
+            }
+        }
+    </script>
+</body>
+</html>
