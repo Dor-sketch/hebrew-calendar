@@ -106,6 +106,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
         .container {
             background-color: #ffffff;
@@ -159,11 +160,77 @@
             color: #e74c3c;
             margin-top: 10px;
         }
+
+
+        header ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        header ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+        }
+
+        header ul li a:hover {
+            text-decoration: underline;
+        }
+
+        header ul li a::before {
+            content: '🔗';
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            header ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .converter {
+                padding: 20px;
+            }
+
+            .explanation {
+                padding: 10px;
+            }
+
+            .footer {
+                padding: 10px;
+            }
+
+            header ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <header>
+        <ul>
+            <li><a href="https://dorpascal.com/hebrew-calendar/he/" style="display: block; text-align: center; margin-bottom: 20px;">Hebrew Calendar</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">Date Conversion</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">Shabbat Times</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/he/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה בעברית</a></li>
+        </ul>
+    </header>
     <div class="container">
-        <h1>זמני שבת</h1>
+        <h1>זמני שבת לפי מיקום</h1>
         <div class="location-input">
             <input type="text" id="city" placeholder="עיר" value="Tel Aviv">
             <button onclick="updateTimes()">עדכן זמנים</button>
@@ -178,6 +245,10 @@
         </div>
         <div id="error-message" class="error-message"></div>
     </div>
+
+    <footer>
+        <p>© 2024 Dor Pascal. All rights reserved | <a href="https://dorpascal.com/">dorpascal.com</a></p>
+    </footer>
 
     <script>
         async function getShabbatTimes(city) {
@@ -227,6 +298,23 @@
 
         // Update times when the page loads
         updateTimes();
+  // Function to get the closest upcoming Friday
+    function getNextFriday(date) {
+        const dayOfWeek = date.getDay();
+        const daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+        const nextFriday = new Date(date);
+        nextFriday.setDate(date.getDate() + daysUntilFriday);
+        return nextFriday;
+    }
+
+    // Get the closest upcoming Friday
+    const d = new Date();
+    const nextFriday = getNextFriday(d);
+
+    // Format the date in Hebrew
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formatter = new Intl.DateTimeFormat('he-IL', options);
+    document.querySelector('h1').textContent = `זמני שבת ליום ${formatter.format(nextFriday)}`;
     </script>
 </body>
 </html>

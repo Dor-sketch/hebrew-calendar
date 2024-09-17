@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +21,12 @@
     <meta name="generator" content="vscode">
     <meta property="og:title" content="Hebrew Calendar">
     <meta property="og:locale" content="en_US">
-    <meta name="description" content="Explore the Hebrew calendar alongside Gregorian dates. Navigate between months to see corresponding Hebrew and Gregorian dates, including months.">
-    <meta name="keywords" content="Hebrew Calendar, Jewish Calendar, Gregorian Calendar, Date Converter, Jewish Dates, Hebrew Dates">
-    <meta property="og:description" content="Explore the Hebrew calendar alongside Gregorian dates. Navigate between months to see corresponding Hebrew and Gregorian dates.">
+    <meta name="description"
+        content="Explore the Hebrew calendar alongside Gregorian dates. Navigate between months to see corresponding Hebrew and Gregorian dates, including months.">
+    <meta name="keywords"
+        content="Hebrew Calendar, Jewish Calendar, Gregorian Calendar, Date Converter, Jewish Dates, Hebrew Dates">
+    <meta property="og:description"
+        content="Explore the Hebrew calendar alongside Gregorian dates. Navigate between months to see corresponding Hebrew and Gregorian dates.">
     <meta property="og:url" content="https://dorpascal.com/hebrew-calendar/">
     <meta property="og:site_name" content="Dor Pascal">
     <meta property="og:type" content="website">
@@ -100,7 +104,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="icons/Web/icons8-tear-off-calendar-windows-11-color-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/Web/icons8-tear-off-calendar-windows-11-color-32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="icons/Web/icons8-tear-off-calendar-windows-11-color-96.png">
-    <link rel="icon" type="image/png" sizes="120x120" href="icons/Web/icons8-tear-off-calendar-windows-11-color-120.png">
+    <link rel="icon" type="image/png" sizes="120x120"
+        href="icons/Web/icons8-tear-off-calendar-windows-11-color-120.png">
     <link rel="shortcut icon" href="https://dorpascal.com/favicon.ico">
 
     <style>
@@ -150,7 +155,8 @@
             padding: 20px;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-align: center;
             color: var(--text-color);
         }
@@ -283,7 +289,6 @@
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
-            border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -292,13 +297,16 @@
                 grid-template-columns: repeat(7, 1fr);
                 gap: 0;
             }
+
             .day {
                 height: 40px;
                 border-radius: 0;
             }
+
             body {
                 padding: 0;
             }
+
             .theme-toggle {
                 top: 10px;
                 right: 10px;
@@ -309,7 +317,9 @@
             #calendar {
                 grid-template-columns: repeat(7, 1fr);
             }
-            h1, h2 {
+
+            h1,
+            h2 {
                 font-size: 1.5em;
             }
         }
@@ -370,8 +380,92 @@
         .dark-theme a:hover {
             text-decoration: underline;
         }
+
+                .new-month::before {
+            content: '🌑';
+            display: block;
+            font-size: 0.8em;
+            margin-top: 5px;
+            color: var(--header-bg);
+        }
+
+        .new-month {
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 0;
+            color: var(--header-bg);
+            background-color: var(--header-text);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .shabbat {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+        }
+
+        header ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        header ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+        }
+
+        header ul li a:hover {
+            text-decoration: underline;
+        }
+
+        header ul li a::before {
+            content: '🔗';
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            header ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .converter {
+                padding: 20px;
+            }
+
+            .explanation {
+                padding: 10px;
+            }
+
+            .footer {
+                padding: 10px;
+            }
+
+            header ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
     </style>
 </head>
+
 <body>
     <header>
         <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
@@ -379,36 +473,43 @@
         <div id="date-display"></div>
         <h1>Hebrew Calendar</h1>
         <div id="parasha-hashavua"></div>
+        <ul>
+            <li><a href="#date-calculation-explanation">Explanation of Calculations</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">Date Conversion</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">Shabbat Times</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/he/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה בעברית</a></li>
+        </ul>
     </header>
     <main>
-        <a href="#date-calculation-explanation">Explanation of Calculations</a>
-        <br>
-        <a href="#date-conversion">Date Conversion</a>
         <div class="toggle-container">
             <label>
                 <input type="checkbox" id="toggle-digits" onchange="toggleDigits()"> Show numbers in Hebrew letters
             </label>
         </div>
-        <a href="https://dorpascal.com/hebrew-calendar/he/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה בעברית</a>
         <div class="controls">
             <button onclick="changeMonth(-1)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                 </svg>
                 Previous Month
-                </button>
+            </button>
             <h2 id="current-month"></h2>
             <button onclick="changeMonth(1)">
                 Next Month
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
                 </svg>
             </button>
         </div>
         <div id="calendar"></div>
         <section id="date-calculation-explanation" class="explanation">
             <h2>How is the Hebrew Date Calculated?</h2>
-            <p>Our calendar uses advanced technology to accurately display the Hebrew date. Here are some key points about how it works:</p>
+            <p>Our calendar uses advanced technology to accurately display the Hebrew date. Here are some key points
+                about how it works:</p>
             <ul>
                 <h3>Date Conversion</h3>
                 <li>We use the browser's built-in system to convert Gregorian (secular) dates to Hebrew dates.</li>
@@ -426,11 +527,13 @@
                 <li>We display Hebrew dates in the traditional format, including Hebrew letters for days and years.</li>
                 <li>You can choose between a regular number display and a traditional Hebrew letter display.</li>
             </ul>
-            <p>Thanks to this combination of modern technology and tradition, we offer an accurate and user-friendly Hebrew calendar.</p>
+            <p>Thanks to this combination of modern technology and tradition, we offer an accurate and user-friendly
+                Hebrew calendar.</p>
         </section>
         <section id="date-conversion" class="explanation">
             <h2>Convert Gregorian Date to Hebrew Date</h2>
-            <p>Use the form below to convert a Gregorian date to a Hebrew date. Simply enter a date and click "Convert" to get the corresponding Hebrew date.</p>
+            <p>Use the form below to convert a Gregorian date to a Hebrew date. Simply enter a date and click "Convert"
+                to get the corresponding Hebrew date.</p>
             <form id="date-conversion-form">
                 <label for="gregorian-date">Gregorian Date:</label>
                 <input type="date" id="gregorian-date" required>
@@ -446,11 +549,64 @@
 
     <script>
         let currentDate = new Date();
+        let useHebrewLetters = false;
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const hebrewNumerals = ['', 'א׳', 'ב׳', 'ג׳', 'ד׳', 'ה', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳',
             'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ',
             'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל'];
-        let useHebrewLetters = false;
+        const parshiot2024 = [
+            { date: new Date(2024, 0, 6), name: 'Shemot' },
+            { date: new Date(2024, 0, 13), name: 'Vaera' },
+            { date: new Date(2024, 0, 20), name: 'Bo' },
+            { date: new Date(2024, 0, 27), name: 'Beshalach' },
+            { date: new Date(2024, 1, 3), name: 'Yitro' },
+            { date: new Date(2024, 1, 10), name: 'Mishpatim' },
+            { date: new Date(2024, 1, 17), name: 'Terumah' },
+            { date: new Date(2024, 1, 24), name: 'Tetzaveh' },
+            { date: new Date(2024, 2, 2), name: 'Ki Tisa' },
+            { date: new Date(2024, 2, 9), name: 'Vayakhel' },
+            { date: new Date(2024, 2, 16), name: 'Pekudei' },
+            { date: new Date(2024, 2, 23), name: 'Vayikra' },
+            { date: new Date(2024, 2, 30), name: 'Tzav' },
+            { date: new Date(2024, 3, 6), name: 'Passover' },
+            { date: new Date(2024, 3, 13), name: 'Shemini' },
+            { date: new Date(2024, 3, 20), name: 'Tazria-Metzora' },
+            { date: new Date(2024, 4, 4), name: 'Achrei Mot-Kedoshim' },
+            { date: new Date(2024, 4, 11), name: 'Emor' },
+            { date: new Date(2024, 4, 18), name: 'Behar' },
+            { date: new Date(2024, 4, 25), name: 'Bechukotai' },
+            { date: new Date(2024, 5, 1), name: 'Bamidbar' },
+            { date: new Date(2024, 5, 8), name: 'Nasso' },
+            { date: new Date(2024, 5, 15), name: 'Beha\'alotcha' },
+            { date: new Date(2024, 5, 22), name: 'Shelach' },
+            { date: new Date(2024, 5, 29), name: 'Korach' },
+            { date: new Date(2024, 6, 6), name: 'Chukat' },
+            { date: new Date(2024, 6, 13), name: 'Balak' },
+            { date: new Date(2024, 6, 20), name: 'Pinchas' },
+            { date: new Date(2024, 6, 27), name: 'Matot-Masei' },
+            { date: new Date(2024, 7, 3), name: 'Devarim' },
+            { date: new Date(2024, 7, 10), name: 'Vaetchanan' },
+            { date: new Date(2024, 7, 17), name: 'Eikev' },
+            { date: new Date(2024, 7, 24), name: 'Re\'eh' },
+            { date: new Date(2024, 7, 31), name: 'Shoftim' },
+            { date: new Date(2024, 8, 7), name: 'Ki Teitzei' },
+            { date: new Date(2024, 8, 14), name: 'Ki Tavo' },
+            { date: new Date(2024, 8, 21), name: 'Nitzavim-Vayeilech' },
+            { date: new Date(2024, 8, 28), name: 'Rosh Hashanah' },
+            { date: new Date(2024, 9, 5), name: 'Ha\'Azinu' },
+            { date: new Date(2024, 9, 12), name: 'Sukkot' },
+            { date: new Date(2024, 9, 19), name: 'Vezot Haberachah' },
+            { date: new Date(2024, 9, 26), name: 'Bereshit' },
+            { date: new Date(2024, 10, 2), name: 'Noach' },
+            { date: new Date(2024, 10, 9), name: 'Lech-Lecha' },
+            { date: new Date(2024, 10, 16), name: 'Vayera' },
+            { date: new Date(2024, 10, 23), name: 'Chayei Sarah' },
+            { date: new Date(2024, 10, 30), name: 'Toldot' },
+            { date: new Date(2024, 11, 7), name: 'Vayetzei' },
+            { date: new Date(2024, 11, 14), name: 'Vayishlach' },
+            { date: new Date(2024, 11, 21), name: 'Vayeshev' },
+            { date: new Date(2024, 11, 28), name: 'Miketz' }
+        ];
 
         function getHebrewDate(gregorianDate, useHebrewLetters = false) {
             const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -541,8 +697,11 @@
 
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
+            const gregorianMonth = new Intl.DateTimeFormat('he-IL', { month: 'long', year: 'numeric' }).format(currentDate);
+            const hebrewMonth = currentDate.toLocaleDateString('he-IL-u-ca-hebrew', { month: 'long', year: 'numeric' }).split(' ')[0];
+            const hebrewYear = currentDate.toLocaleDateString('he-IL-u-ca-hebrew', { year: 'numeric' }).split(' ')[1];
 
-            document.getElementById('current-month').textContent = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate);
+            document.getElementById('current-month').textContent = `${gregorianMonth.split(' ')[0]} / ${hebrewMonth} ${gregorianMonth.split(' ')[1]}`;
 
             daysOfWeek.forEach(day => {
                 const dayHeader = document.createElement('div');
@@ -587,6 +746,29 @@
                 <div class="hebrew-date">${hebrewDate}</div>
             `;
 
+            const gregorianDate = date.getDate() + '/' + (date.getMonth() + 1);
+            const weeklyParasha = getParashatHashavua(date);
+
+            // if shapat add weekly parasha
+            if (date.getDay() === 6) {
+                const parashaEl = document.createElement('div');
+                parashaEl.className = 'parasha';
+                parashaEl.textContent = weeklyParasha;
+                dayEl.appendChild(parashaEl);
+            }
+
+
+            // if new hebrew month add its name
+            if (hebrewDate === 'א׳') {
+                const newMonthEl = document.createElement('div');
+                newMonthEl.className = 'new-month';
+                newMonthEl.textContent = date.toLocaleDateString('he-IL-u-ca-hebrew', { month: 'long' }).split(' ')[0];
+                dayEl.appendChild(newMonthEl);
+            }
+            else {
+                console.log(hebrewDate);
+            }
+
             return dayEl;
         }
 
@@ -610,63 +792,19 @@
             renderCalendar();
         }
 
-const parshiot2024 = [
-    { date: new Date(2024, 0, 6), name: 'Shemot' },
-    { date: new Date(2024, 0, 13), name: 'Vaera' },
-    { date: new Date(2024, 0, 20), name: 'Bo' },
-    { date: new Date(2024, 0, 27), name: 'Beshalach' },
-    { date: new Date(2024, 1, 3), name: 'Yitro' },
-    { date: new Date(2024, 1, 10), name: 'Mishpatim' },
-    { date: new Date(2024, 1, 17), name: 'Terumah' },
-    { date: new Date(2024, 1, 24), name: 'Tetzaveh' },
-    { date: new Date(2024, 2, 2), name: 'Ki Tisa' },
-    { date: new Date(2024, 2, 9), name: 'Vayakhel' },
-    { date: new Date(2024, 2, 16), name: 'Pekudei' },
-    { date: new Date(2024, 2, 23), name: 'Vayikra' },
-    { date: new Date(2024, 2, 30), name: 'Tzav' },
-    { date: new Date(2024, 3, 6), name: 'Passover' },
-    { date: new Date(2024, 3, 13), name: 'Shemini' },
-    { date: new Date(2024, 3, 20), name: 'Tazria-Metzora' },
-    { date: new Date(2024, 4, 4), name: 'Achrei Mot-Kedoshim' },
-    { date: new Date(2024, 4, 11), name: 'Emor' },
-    { date: new Date(2024, 4, 18), name: 'Behar' },
-    { date: new Date(2024, 4, 25), name: 'Bechukotai' },
-    { date: new Date(2024, 5, 1), name: 'Bamidbar' },
-    { date: new Date(2024, 5, 8), name: 'Nasso' },
-    { date: new Date(2024, 5, 15), name: 'Beha\'alotcha' },
-    { date: new Date(2024, 5, 22), name: 'Shelach' },
-    { date: new Date(2024, 5, 29), name: 'Korach' },
-    { date: new Date(2024, 6, 6), name: 'Chukat' },
-    { date: new Date(2024, 6, 13), name: 'Balak' },
-    { date: new Date(2024, 6, 20), name: 'Pinchas' },
-    { date: new Date(2024, 6, 27), name: 'Matot-Masei' },
-    { date: new Date(2024, 7, 3), name: 'Devarim' },
-    { date: new Date(2024, 7, 10), name: 'Vaetchanan' },
-    { date: new Date(2024, 7, 17), name: 'Eikev' },
-    { date: new Date(2024, 7, 24), name: 'Re\'eh' },
-    { date: new Date(2024, 7, 31), name: 'Shoftim' },
-    { date: new Date(2024, 8, 7), name: 'Ki Teitzei' },
-    { date: new Date(2024, 8, 14), name: 'Ki Tavo' },
-    { date: new Date(2024, 8, 21), name: 'Nitzavim-Vayeilech' },
-    { date: new Date(2024, 8, 28), name: 'Rosh Hashanah' },
-    { date: new Date(2024, 9, 5), name: 'Ha\'Azinu' },
-    { date: new Date(2024, 9, 12), name: 'Sukkot' },
-    { date: new Date(2024, 9, 19), name: 'Vezot Haberachah' },
-    { date: new Date(2024, 9, 26), name: 'Bereshit' },
-    { date: new Date(2024, 10, 2), name: 'Noach' },
-    { date: new Date(2024, 10, 9), name: 'Lech-Lecha' },
-    { date: new Date(2024, 10, 16), name: 'Vayera' },
-    { date: new Date(2024, 10, 23), name: 'Chayei Sarah' },
-    { date: new Date(2024, 10, 30), name: 'Toldot' },
-    { date: new Date(2024, 11, 7), name: 'Vayetzei' },
-    { date: new Date(2024, 11, 14), name: 'Vayishlach' },
-    { date: new Date(2024, 11, 21), name: 'Vayeshev' },
-    { date: new Date(2024, 11, 28), name: 'Miketz' }
-];
-        function getParashatHashavua() {
-            const now = new Date();
+        function getParashatHashavua(hebrewDate = null) {
+            let now;
+            if (hebrewDate) {
+                // Convert Hebrew date to Gregorian date
+                now = new Date(hebrewDate.toLocaleDateString('en-US', { calendar: 'gregory' }));
+            } else {
+                now = new Date();
+            }
+            const nextWeek = new Date(now);
+            nextWeek.setDate(now.getDate() - 7); // Move before due to offset
+
             for (let i = parshiot2024.length - 1; i >= 0; i--) {
-                if (now >= parshiot2024[i].date) {
+                if (nextWeek >= parshiot2024[i].date) {
                     return parshiot2024[i].name;
                 }
             }
@@ -701,7 +839,7 @@ const parshiot2024 = [
             document.getElementById('hebrew-date').textContent = `The Hebrew date is: ${hebrewDate}`;
         });
 
-        window.onload = function() {
+        window.onload = function () {
             loadPreferences();
             renderCalendar();
             updateClock();
@@ -711,4 +849,5 @@ const parshiot2024 = [
         };
     </script>
 </body>
+
 </html>
