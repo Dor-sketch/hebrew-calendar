@@ -2,7 +2,7 @@
 
 Web deployment: [Hebrew Date Calculator](https://dorpascal.com/hebrew-calendar/he/)
 Chrome Extension: [Hebrew Date Calculator](https://chromewebstore.google.com/detail/hebrew-calendar/hibmadldekamhiflhbaflaiafdbigihe)
-
+![alt text](chrome-preview.png)
 The code uses JavaScript's `Intl.DateTimeFormat` API to convert Gregorian dates to Hebrew dates. Here's a breakdown of how it works:
 
 1. **Intl.DateTimeFormat Initialization:**
