@@ -475,6 +475,9 @@
             localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
             const themeToggle = document.querySelector('.theme-toggle');
             themeToggle.textContent = isDarkTheme ? 'Light Mode' : 'Dark Mode';
+            // update page theme color
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            metaThemeColor.setAttribute('content', isDarkTheme ? '#2c3e50' : '#3498db');
             renderCalendar();
         }
 
