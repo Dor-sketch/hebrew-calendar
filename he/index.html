@@ -432,7 +432,7 @@
             font-weight: bold;
         }
 
-                header ul {
+        header ul {
             list-style-type: none;
             padding: 0;
             display: flex;
@@ -488,7 +488,6 @@
                 margin: 10px 0;
             }
         }
-
     </style>
 </head>
 
@@ -503,7 +502,8 @@
             <li><a href="#date-calculation-explanation">הסבר על החישוב</a></li>
             <li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">המרת תאריך לועזי לעברי</a></li>
             <li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">זמני כניסה ויציאת שבת לפי מיקום</a></li>
-            <li><a href="https://dorpascal.com/hebrew-calendar/" style="display: block; text-align: center; margin-bottom: 20px;">Hebrew Calendar</a></li>
+            <li><a href="https://dorpascal.com/hebrew-calendar/"
+                    style="display: block; text-align: center; margin-bottom: 20px;">Hebrew Calendar</a></li>
         </ul>
     </header>
     <main>
@@ -681,10 +681,6 @@
                     hebrewDate += ' ' + (useDigits ? part.value : convertToHebrewYear(part.value));
                 }
             });
-
-            // if (hebrewDate.includes('א׳')) {
-            //     hebrewDate = hebrewDate.replace('א׳', '🌑 א');
-            // }
 
             return hebrewDate.trim();
         }
