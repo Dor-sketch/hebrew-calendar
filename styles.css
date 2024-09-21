@@ -165,7 +165,7 @@ header {
         gap: 0;
     }
     .day {
-        height: 40px;
+        height: 64px;
         border-radius: 0;
     }
     body {
@@ -175,6 +175,33 @@ header {
         top: 10px;
         right: 10px;
     }
+    .parasha {
+        font-size: 0.8em;
+        text-align: left;
+    }
+     .new-month {
+        content: '';
+        font-size: 0.5em;
+        margin-top: 5px;
+        color: var(--header-bg);
+        text-align: center;
+     }
+     header {
+     margin-bottom: 0;
+     }
+     .toggle-container {
+        margin-bottom: 0;
+     }
+     main {
+     padding: 0;
+     }
+     #current-month {
+        font-size: 1em;
+        }
+        .controls {
+        margin-right: 8px;
+        margin-left: 8px;
+        }
 }
 @media (max-width: 480px) {
     #calendar {
@@ -232,11 +259,12 @@ button svg {
     text-decoration: underline;
 }
 .new-month::before {
-    content: '🌑';
+    content: '';
     display: block;
     font-size: 0.8em;
     margin-top: 5px;
     color: var(--header-bg);
+    white-space: nowrap;
 }
 .new-month {
     font-weight: bold;
@@ -420,6 +448,10 @@ header ul li a::before {
     #mobile-menu > ul {
         flex-direction: column;
         align-items: flex-start;
+    }
+    .new-month {
+        font-size: 0.8em;
+        padding: 0;
     }
 }
 
