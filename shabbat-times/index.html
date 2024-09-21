@@ -98,26 +98,13 @@
     </script>
 
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-        }
+
         .container {
             background-color: #ffffff;
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
         }
         .time-display {
             font-size: 24px;
@@ -146,55 +133,13 @@
             padding: 10px;
             font-size: 16px;
         }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
+
         .error-message {
             color: #e74c3c;
             margin-top: 10px;
         }
 
 
-        header ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        header ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        header ul li a {
-            color: var(--header-text);
-            text-decoration: none;
-        }
-
-        header ul li a:hover {
-            text-decoration: underline;
-        }
-
-        header ul li a::before {
-            content: '🔗';
-            margin-right: 5px;
-        }
-
-        @media (max-width: 768px) {
-            header ul li {
-                display: block;
-                margin: 10px 0;
-            }
-        }
 
         @media (max-width: 600px) {
             .container {
@@ -209,32 +154,69 @@
                 padding: 10px;
             }
 
-            .footer {
-                padding: 10px;
-            }
+
 
             header ul li {
                 display: block;
                 margin: 10px 0;
             }
         }
+        #times {
+        display: unset;
+        }
+        #top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row-reverse;
+        }
+
+        body.dark-theme h2 {
+            color: #333;
+        }
     </style>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <header>
-        <ul>
-            <li><a href="https://dorpascal.com/hebrew-calendar/he/" style="display: block; text-align: center; margin-bottom: 20px;">Hebrew Calendar</a></li>
-            <li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">Date Conversion</a></li>
-            <li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">Shabbat Times</a></li>
-            <li><a href="https://dorpascal.com/hebrew-calendar/he/" style="display: block; text-align: center; margin-bottom: 20px;">לגרסה בעברית</a></li>
-            <li><a href="https://dorpascal.com/hebrew-calendar/privacy-policy">Privacy Policy</a></li>
-        </ul>
+        <div id="top">
+            <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+            <button id="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="mobile-menu">
+                <ul>
+                    <li><a href="https://dorpascal.com/hebrew-calendar/">Home</a></li>
+                    <li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">Date Conversion</a></li>
+                    <li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">Shabbat Times</a></li>
+                    <li><a href="https://chromewebstore.google.com/detail/hebrew-calendar/hibmadldekamhiflhbaflaiafdbigihe">Chrome Extension</a></li>
+                    <li><a href="https://dorpascal.com/hebrew-calendar/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="https://dorpascal.com/hebrew-calendar/he/">לוח שנה בעברית</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id="clock"></div>
+        <div id="date-display"></div>
+        <h1>זמני שבת לפי מיקום</h1>
+        <div id="parasha-hashavua"></div>
+        <nav id="menu"></nav>
+            <ul>
+                <li><a href="#date-calculation-explanation">Explanation of Calculations</a></li>
+                <li><a href="https://dorpascal.com/hebrew-calendar/המרת-תאריך-לועזי-לעברי/">Date Conversion</a></li>
+                <li><a href="https://dorpascal.com/hebrew-calendar/shabbat-times/">Shabbat Times</a></li>
+                <li><a href="https://chromewebstore.google.com/detail/hebrew-calendar/hibmadldekamhiflhbaflaiafdbigihe">Chrome Extension</a></li>
+                <li><a href="https://dorpascal.com/hebrew-calendar/privacy-policy">Privacy Policy</a></li>
+                <li><a href="https://dorpascal.com/hebrew-calendar/he/">לעברית</a></li>
+            </ul>
+        </nav>
     </header>
     <div class="container">
-        <h1>זמני שבת לפי מיקום</h1>
+        <h2>זמני שבת לפי מיקום</h2>
         <div class="location-input">
             <input type="text" id="city" placeholder="עיר" value="Tel Aviv">
-            <button onclick="updateTimes()">עדכן זמנים</button>
+            <button id="times" onclick="updateTimes()">עדכן זמנים</button>
         </div>
         <div class="time-display">
             <span class="label">כניסת השבת:</span>
@@ -247,8 +229,9 @@
         <div id="error-message" class="error-message"></div>
     </div>
 
-    <footer>
-        <p>© 2024 Dor Pascal. All rights reserved | <a href="https://dorpascal.com/">dorpascal.com</a></p>
+    <footer class="footer">
+        <p>Created by <a href="https://dorpascal.com">Dor Pascal</a></p>
+        <p>&copy; 2024 Dor Pascal. All rights reserved.</p>
     </footer>
 
     <script>
@@ -316,6 +299,265 @@
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const formatter = new Intl.DateTimeFormat('he-IL', options);
     document.querySelector('h1').textContent = `זמני שבת ליום ${formatter.format(nextFriday)}`;
+    </script>
+    <script>
+        let currentDate = new Date();
+        let useHebrewLetters = true;
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const hebrewNumerals = ['', 'א׳', 'ב׳', 'ג׳', 'ד׳', 'ה', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳',
+            'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ',
+            'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל'];
+        const parshiot2024 = [
+            { date: new Date(2024, 0, 6), name: 'Shemot' },
+            { date: new Date(2024, 0, 13), name: 'Vaera' },
+            { date: new Date(2024, 0, 20), name: 'Bo' },
+            { date: new Date(2024, 0, 27), name: 'Beshalach' },
+            { date: new Date(2024, 1, 3), name: 'Yitro' },
+            { date: new Date(2024, 1, 10), name: 'Mishpatim' },
+            { date: new Date(2024, 1, 17), name: 'Terumah' },
+            { date: new Date(2024, 1, 24), name: 'Tetzaveh' },
+            { date: new Date(2024, 2, 2), name: 'Ki Tisa' },
+            { date: new Date(2024, 2, 9), name: 'Vayakhel' },
+            { date: new Date(2024, 2, 16), name: 'Pekudei' },
+            { date: new Date(2024, 2, 23), name: 'Vayikra' },
+            { date: new Date(2024, 2, 30), name: 'Tzav' },
+            { date: new Date(2024, 3, 6), name: 'Passover' },
+            { date: new Date(2024, 3, 13), name: 'Shemini' },
+            { date: new Date(2024, 3, 20), name: 'Tazria-Metzora' },
+            { date: new Date(2024, 4, 4), name: 'Achrei Mot-Kedoshim' },
+            { date: new Date(2024, 4, 11), name: 'Emor' },
+            { date: new Date(2024, 4, 18), name: 'Behar' },
+            { date: new Date(2024, 4, 25), name: 'Bechukotai' },
+            { date: new Date(2024, 5, 1), name: 'Bamidbar' },
+            { date: new Date(2024, 5, 8), name: 'Nasso' },
+            { date: new Date(2024, 5, 15), name: 'Beha\'alotcha' },
+            { date: new Date(2024, 5, 22), name: 'Shelach' },
+            { date: new Date(2024, 5, 29), name: 'Korach' },
+            { date: new Date(2024, 6, 6), name: 'Chukat' },
+            { date: new Date(2024, 6, 13), name: 'Balak' },
+            { date: new Date(2024, 6, 20), name: 'Pinchas' },
+            { date: new Date(2024, 6, 27), name: 'Matot-Masei' },
+            { date: new Date(2024, 7, 3), name: 'Devarim' },
+            { date: new Date(2024, 7, 10), name: 'Vaetchanan' },
+            { date: new Date(2024, 7, 17), name: 'Eikev' },
+            { date: new Date(2024, 7, 24), name: 'Re\'eh' },
+            { date: new Date(2024, 7, 31), name: 'Shoftim' },
+            { date: new Date(2024, 8, 7), name: 'Ki Teitzei' },
+            { date: new Date(2024, 8, 14), name: 'Ki Tavo' },
+            { date: new Date(2024, 8, 21), name: 'Nitzavim-Vayeilech' },
+            { date: new Date(2024, 8, 28), name: 'Rosh Hashanah' },
+            { date: new Date(2024, 9, 5), name: 'Ha\'Azinu' },
+            { date: new Date(2024, 9, 12), name: 'Sukkot' },
+            { date: new Date(2024, 9, 19), name: 'Vezot Haberachah' },
+            { date: new Date(2024, 9, 26), name: 'Bereshit' },
+            { date: new Date(2024, 10, 2), name: 'Noach' },
+            { date: new Date(2024, 10, 9), name: 'Lech-Lecha' },
+            { date: new Date(2024, 10, 16), name: 'Vayera' },
+            { date: new Date(2024, 10, 23), name: 'Chayei Sarah' },
+            { date: new Date(2024, 10, 30), name: 'Toldot' },
+            { date: new Date(2024, 11, 7), name: 'Vayetzei' },
+            { date: new Date(2024, 11, 14), name: 'Vayishlach' },
+            { date: new Date(2024, 11, 21), name: 'Vayeshev' },
+            { date: new Date(2024, 11, 28), name: 'Miketz' }
+        ];
+
+        function getHebrewDate(gregorianDate, useHebrewLetters = true) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formatter = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options);
+            const parts = formatter.formatToParts(gregorianDate);
+
+            let hebrewDate = '';
+            parts.forEach(part => {
+                if (part.type === 'day') {
+                    hebrewDate += useHebrewLetters ? hebrewNumerals[parseInt(part.value)] : part.value;
+                } else if (part.type === 'month') {
+                    hebrewDate += ' ' + part.value;
+                } else if (part.type === 'year') {
+                    const year = parseInt(part.value.replace(/['\u05F3"״]/g, ""), 10);
+                    hebrewDate += ' ' + convertToHebrewYear(year);
+                }
+            });
+
+            return hebrewDate.trim();
+        }
+
+        function convertToHebrewYear(numericYear) {
+            const hebrewNumerals = [
+                'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר', 'ש', 'ת'
+            ];
+            const specialCases = {
+                15: 'ט״ו',
+                16: 'ט״ז'
+            };
+
+            let year = parseInt(numericYear) - 5000;
+            let result = 'ה׳';
+
+            let hundreds = Math.floor(year / 100);
+            year %= 100;
+            let tens = Math.floor(year / 10);
+            let ones = year % 10;
+
+            if (hundreds > 0) {
+                if (hundreds === 7) {
+                    result += 'תש';
+                } else if (hundreds === 6) {
+                    result += 'ש';
+                } else if (hundreds === 5) {
+                    result += 'ה';
+                } else if (hundreds === 4) {
+                    result += 'ד';
+                }
+            }
+
+            if (tens > 0) {
+                const tensMap = {
+                    1: 'י', 2: 'כ', 3: 'ל', 4: 'מ', 5: 'נ', 6: 'ס', 7: 'ע', 8: 'פ', 9: 'צ'
+                };
+                result += tensMap[tens];
+            }
+
+            if (ones > 0) {
+                result += hebrewNumerals[ones - 1];
+            }
+
+            if (tens === 1 && (ones === 5 || ones === 6)) {
+                result = result.slice(0, -2) + specialCases[tens * 10 + ones];
+            } else {
+                if (result.length > 3) {
+                    result = result.slice(0, -1) + '״' + result.slice(-1);
+                } else if (result.length > 2) {
+                    result += '׳';
+                }
+            }
+
+            return result;
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US');
+            const dateString = now.toLocaleDateString('en-US');
+            const hebrewDateString = getHebrewDate(now, useHebrewLetters);
+
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date-display').textContent = `${dateString} - ${hebrewDateString}`;
+        }
+
+        function createDayElement(date, isOtherMonth, today) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'day' + (isOtherMonth ? ' other-month' : '');
+
+            if (today && date.toDateString() === today.toDateString()) {
+                dayEl.classList.add('today');
+            }
+
+            const hebrewDate = getHebrewDate(date, useHebrewLetters).split(' ')[0];
+
+            dayEl.innerHTML = `
+                <div>${date.getDate()}</div>
+                <div class="hebrew-date">${hebrewDate}</div>
+            `;
+
+            const gregorianDate = date.getDate() + '/' + (date.getMonth() + 1);
+            const weeklyParasha = getParashatHashavua(date);
+
+            // if shapat add weekly parasha
+            if (date.getDay() === 6) {
+                const parashaEl = document.createElement('div');
+                parashaEl.className = 'parasha';
+                parashaEl.textContent = weeklyParasha;
+                dayEl.appendChild(parashaEl);
+            }
+
+
+            // if new hebrew month add its name
+            if (hebrewDate === 'א׳') {
+                const newMonthEl = document.createElement('div');
+                newMonthEl.className = 'new-month';
+                newMonthEl.textContent = date.toLocaleDateString('he-IL-u-ca-hebrew', { month: 'long' }).split(' ')[0];
+                dayEl.appendChild(newMonthEl);
+            }
+            else {
+                console.log(hebrewDate);
+            }
+
+            return dayEl;
+        }
+
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const isDarkTheme = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.textContent = isDarkTheme ? 'Light Mode' : 'Dark Mode';
+        }
+
+        function getParashatHashavua(hebrewDate = null) {
+            let now;
+            if (hebrewDate) {
+                // Convert Hebrew date to Gregorian date
+                now = new Date(hebrewDate.toLocaleDateString('en-US', { calendar: 'gregory' }));
+            } else {
+                now = new Date();
+            }
+            const nextWeek = new Date(now);
+            nextWeek.setDate(now.getDate() - 7); // Move before due to offset
+
+            for (let i = parshiot2024.length - 1; i >= 0; i--) {
+                if (nextWeek >= parshiot2024[i].date) {
+                    return parshiot2024[i].name;
+                }
+            }
+            return parshiot2024[0].name;
+        }
+
+        function displayParashatHashavua() {
+            const parasha = getParashatHashavua();
+            const parashaElement = document.getElementById('parasha-hashavua');
+            parashaElement.textContent = `Weekly Torah Portion: ${parasha}`;
+        }
+
+        function loadPreferences() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.querySelector('.theme-toggle').textContent = 'Light Mode';
+            }
+
+            const savedUseDigits = localStorage.getItem('useDigits');
+            if (savedUseDigits !== null) {
+                useHebrewLetters = savedUseDigits != 'true';
+            }
+        }
+
+
+        window.onload = function () {
+            loadPreferences();
+            updateClock();
+            displayParashatHashavua();
+            setInterval(updateClock, 1000);
+        };
+
+        // Add this to your existing JavaScript
+
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('active');
+}
+
+// Add this to your window.onload function
+document.getElementById('menu-toggle').addEventListener('click', toggleMobileMenu);
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuToggle = document.getElementById('menu-toggle');
+    if (!mobileMenu.contains(event.target) && event.target !== menuToggle) {
+        mobileMenu.classList.remove('active');
+    }
+});
     </script>
 </body>
 </html>
