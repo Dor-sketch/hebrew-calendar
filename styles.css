@@ -300,9 +300,19 @@ header ul li a:hover {
     text-decoration: underline;
 }
 header ul li a::before {
-    content: '🔗';
-    margin-right: 5px;
+    content: '';
+    margin-right: 0;
 }
+
+header ul li a:hover {
+    text-decoration: underline;
+}
+
+header ul li a:active {
+    color: var(--today-bg);
+}
+
+
 @media (max-width: 768px) {
     header ul li {
         display: block;
@@ -414,6 +424,7 @@ header ul li a::before {
 
 #mobile-menu.active {
     right: 0;
+    z-index: 1;
 }
 
 #mobile-menu ul {
@@ -429,6 +440,14 @@ header ul li a::before {
     text-decoration: none;
     color: #333;
     font-size: 18px;
+}
+
+#mobile-menu ul li a:hover {
+    color: #3498db;
+}
+
+#mobile-menu ul li a:active {
+    color: var(--today-bg);
 }
 
 /* Media query for mobile devices */
