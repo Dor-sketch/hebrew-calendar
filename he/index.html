@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +33,7 @@
     <meta property="twitter:title" content="לוח שנה עברי">
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-title" content="לוח שנה עברי">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="application-name" content="לוח שנה עברי">
     <link rel="canonical" href="https://dorpascal.com/hebrew-calendar/he/">
@@ -228,8 +227,6 @@
     </footer>
 
     <script>
-
-
         const parshiot2024 = [
             { date: new Date(2024, 0, 6), name: 'שְׁמוֹת' },
             { date: new Date(2024, 0, 13), name: 'וָאֵרָא' },
@@ -301,16 +298,6 @@
 
             return hebrewDate.trim();
         }
-        // listen for form submission
-        document.getElementById('date-conversion-form').addEventListener('submit', function (event) {
-
-            event.preventDefault();
-
-            const gregorianDate = new Date(document.getElementById('gregorian-date').value);
-            const hebrewDate = convertToHebrewDate(gregorianDate);
-
-            document.getElementById('hebrew-date').textContent = `התאריך העברי הוא: ${hebrewDate}`;
-        });
 
 
         let currentDate = new Date();
@@ -319,7 +306,9 @@
         const hebrewNumerals = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳', 'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ', 'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל'];
         let useDigits = false;
 
+
         function getHebrewDate(gregorianDate, useDigits = false) {
+            console.log(gregorianDate);
             const options = { day: 'numeric', month: 'long', year: 'numeric' };
             const formatter = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options);
             const parts = formatter.formatToParts(gregorianDate);
@@ -337,6 +326,15 @@
 
             return hebrewDate.trim();
         }
+
+        // listen for form submission
+        document.getElementById('date-conversion-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const gregorianDate = new Date(document.getElementById('gregorian-date').value);
+            const hebrewDate = getHebrewDate(gregorianDate, useDigits);
+            document.getElementById('hebrew-date').textContent = `התאריך העברי הוא: ${hebrewDate}`;
+        });
+
 
         function convertToHebrewYear(numericYear) {
             const hebrewNumerals = [
@@ -484,7 +482,6 @@
                 dayEl.appendChild(parashaEl);
             }
 
-
             // if new hebrew month add its name
             if (hebrewDate === 'א׳') {
                 const newMonthEl = document.createElement('div');
@@ -541,7 +538,6 @@
             parashaElement.textContent = `פרשת השבוע: ${parasha}`;
         }
 
-        // Modify the existing toggleTheme function
         function toggleTheme() {
             document.body.classList.toggle('dark-theme');
             const isDarkTheme = document.body.classList.contains('dark-theme');
@@ -551,7 +547,6 @@
             renderCalendar();
         }
 
-        // Modify the existing toggleDigits function
         function toggleDigits() {
             useDigits = !useDigits;
             localStorage.setItem('useDigits', useDigits);
@@ -584,20 +579,19 @@
         };
 
         function toggleMobileMenu() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenu.classList.toggle('active');
-}
-
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('active');
+        }
 
         document.getElementById('menu-toggle').addEventListener('click', toggleMobileMenu);
         // Close menu when clicking outside
-document.addEventListener('click', function(event) {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuToggle = document.getElementById('menu-toggle');
-    if (!mobileMenu.contains(event.target) && event.target !== menuToggle) {
-        mobileMenu.classList.remove('active');
-    }
-});
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuToggle = document.getElementById('menu-toggle');
+            if (!mobileMenu.contains(event.target) && event.target !== menuToggle) {
+                mobileMenu.classList.remove('active');
+            }
+        });
     </script>
 </body>
 
