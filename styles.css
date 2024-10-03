@@ -140,8 +140,8 @@ button:hover {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: var(--button-bg);
-    color: var(--header-text);
+    background-color: var(--text-color);
+    color: var(--header-bg);
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -150,6 +150,9 @@ button:hover {
 }
 .theme-toggle:hover {
     background-color: var(--button-hover);
+}
+body.dark-theme .theme-toggle:hover {
+    background-color: var(--button-bg);
 }
 header {
     background-color: var(--header-bg);
