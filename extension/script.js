@@ -4,7 +4,6 @@ let isDarkTheme = false;
 const daysOfWeek = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
 const daysOfWeekShort = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
 const hebrewNumerals = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳', 'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ', 'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל'];
-
 const parshiot2024 = [
     { date: new Date(2024, 0, 6), name: 'שְׁמוֹת' },
     { date: new Date(2024, 0, 13), name: 'וָאֵרָא' },
@@ -54,7 +53,59 @@ const parshiot2024 = [
     { date: new Date(2024, 11, 7), name: 'וַיֵּצֵא' },
     { date: new Date(2024, 11, 14), name: 'וַיִּשְׁלַח' },
     { date: new Date(2024, 11, 21), name: 'וַיֵּשֶׁב' },
-    { date: new Date(2024, 11, 28), name: 'מִקֵּץ' }
+    { date: new Date(2024, 11, 28), name: 'מִקֵּץ' },
+    // 2025 Parshiot
+    { date: new Date(2025, 0, 4), name: 'וַיִּגַּשׁ' },
+    { date: new Date(2025, 0, 11), name: 'וַיְחִי' },
+    { date: new Date(2025, 0, 18), name: 'שְׁמוֹת' },
+    { date: new Date(2025, 0, 25), name: 'וָאֵרָא' },
+    { date: new Date(2025, 1, 1), name: 'בֹּא' },
+    { date: new Date(2025, 1, 8), name: 'בְּשַׁלַּח' },
+    { date: new Date(2025, 1, 15), name: 'יִתְרוֹ' },
+    { date: new Date(2025, 1, 22), name: 'מִּשְׁפָּטִים' },
+    { date: new Date(2025, 2, 1), name: 'תְּרוּמָה' },
+    { date: new Date(2025, 2, 8), name: 'תְּצַוֶּה' },
+    { date: new Date(2025, 2, 15), name: 'כִּי תִשָּׂא' },
+    { date: new Date(2025, 2, 22), name: 'וַיַּקְהֵל־פְקוּדֵי' },
+    { date: new Date(2025, 2, 29), name: 'וַיִּקְרָא' },
+    { date: new Date(2025, 3, 5), name: 'צַו' },
+    { date: new Date(2025, 3, 12), name: 'שְּׁמִינִי' },
+    { date: new Date(2025, 3, 19), name: 'תַזְרִיעַ־מְצֹרָע' },
+    { date: new Date(2025, 3, 26), name: 'אַחֲרֵי מוֹת־קְדשִׁים' },
+    { date: new Date(2025, 4, 3), name: 'אֱמוֹר' },
+    { date: new Date(2025, 4, 10), name: 'בְּהַר־בְּחֻקֹּתַי' },
+    { date: new Date(2025, 4, 17), name: 'בְּמִדְבַּר' },
+    { date: new Date(2025, 4, 24), name: 'נָשׂא' },
+    { date: new Date(2025, 4, 31), name: 'בְּהַעֲלֹתְךָ' },
+    { date: new Date(2025, 5, 7), name: 'שְׁלַח־לְךָ' },
+    { date: new Date(2025, 5, 14), name: 'קוֹרַח' },
+    { date: new Date(2025, 5, 21), name: 'חֻקַּת־בָּלָק' },
+    { date: new Date(2025, 5, 28), name: 'פִּינְחָס' },
+    { date: new Date(2025, 6, 5), name: 'מַּטּוֹת־מַסְעֵי' },
+    { date: new Date(2025, 6, 12), name: 'דְּבָרִים' },
+    { date: new Date(2025, 6, 19), name: 'וָאֶתְחַנַּן' },
+    { date: new Date(2025, 6, 26), name: 'עֵקֶב' },
+    { date: new Date(2025, 7, 2), name: 'רְאֵה' },
+    { date: new Date(2025, 7, 9), name: 'שׁוֹפְטִים' },
+    { date: new Date(2025, 7, 16), name: 'כִּי־תֵצֵא' },
+    { date: new Date(2025, 7, 23), name: 'כִּי־תָבוֹא' },
+    { date: new Date(2025, 7, 30), name: 'נִצָּבִים' },
+    { date: new Date(2025, 8, 6), name: 'וַיֵּלֶךְ' },
+    { date: new Date(2025, 8, 13), name: 'הַאֲזִינוּ' },
+    { date: new Date(2025, 8, 27), name: 'בְּרֵאשִׁית' },
+    { date: new Date(2025, 9, 4), name: 'נֹחַ' },
+    { date: new Date(2025, 9, 11), name: 'לֶךְ־לְךָ' },
+    { date: new Date(2025, 9, 18), name: 'וַיֵּרָא' },
+    { date: new Date(2025, 9, 25), name: 'חַיֵּי שָֹרָה' },
+    { date: new Date(2025, 10, 1), name: 'תּוֹלְדוֹת' },
+    { date: new Date(2025, 10, 8), name: 'וַיֵּצֵא' },
+    { date: new Date(2025, 10, 15), name: 'וַיִּשְׁלַח' },
+    { date: new Date(2025, 10, 22), name: 'וַיֵּשֶׁב' },
+    { date: new Date(2025, 10, 29), name: 'מִקֵּץ' },
+    { date: new Date(2025, 11, 6), name: 'וַיִּגַּשׁ' },
+    { date: new Date(2025, 11, 13), name: 'וַיְחִי' },
+    { date: new Date(2025, 11, 20), name: 'שְׁמוֹת' },
+    { date: new Date(2025, 11, 27), name: 'וָאֵרָא' }
 ];
 console.log('Script started. Initial state:', { currentDate, useDigits, isDarkTheme });
 
